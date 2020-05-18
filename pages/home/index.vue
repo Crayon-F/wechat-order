@@ -435,6 +435,7 @@
 					padding:0 20px;
 					height: 50px;
 					line-height: 50px;
+					font-size: 22rpx;
 					&.active{
 						border-right: 1px solid #FF6600;
 					}
@@ -461,7 +462,7 @@
 						border-radius: 50%;
 					}
 					.name{
-						font-size: 14px;
+						font-size:22rpx;
 					}
 				}
 				
