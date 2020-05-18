@@ -27,7 +27,7 @@
 				<span class='totalPirce'>￥{{totalPirce}}</span>
 			</view>
 			<view>
-				<button :disabled="totalNumber == 0" class="shop-btn" type="primary" size="mini" @click="generateOrder" :loading="isLoading">下单</button>
+				<button :disabled="totalNumber == 0" class="shop-btn" type="primary" size="mini" @click="generateOrder" :loading="isLoadingOrder">下单</button>
 			</view>
 		</view>
 		<!-- 商品详情然弹窗 -->
@@ -127,7 +127,7 @@
 				activeId:'',
 				navList:[{id:'', name: '全部'}],
 				shopList:[],
-				isLoading:false,
+				isLoadingOrder:false,
 				detailInfo:{},
 				propertyChildIds:{},
 				currentShopInfo:{
@@ -228,37 +228,57 @@
 			//下单
 			generateOrder(){
 				let _this = this;
+				this.isLoadingOrder = true;
 				// 没有登陆
 				let userInfo = uni.getStorageSync('userInfo');
 				if(!userInfo){
-					// this.$refs.warrantLogin.open()
 					if(this.isCanUse){
-						uni.authorize({
-						    scope: 'scope.userInfo',
-						    success() {
-						        uni.getUserInfo({
-									  provider: 'weixin',
-									  success:(infoRes)=>{
-										console.log('用户信息：' + infoRes.userInfo.nickName);
-										_this.isCanUse = false;
-										uni.setStorageSync('isCanUse', false);
-										_this.$refs.warrantLogin.open();
-									  }
-								})
-						    }
-						})
+						this.$refs.warrantLogin.open()
+						uni.setStorageSync('isCanUse', false);
+						_this.isLoadingOrder = false;
+						// uni.authorize({
+						//     scope: 'scope.userInfo',
+						//     success() {
+						//         uni.getUserInfo({
+						// 			  provider: 'weixin',
+						// 			  success:(infoRes)=>{
+						// 				console.log('用户信息：' + infoRes.userInfo.nickName);
+						// 				_this.isCanUse = false;
+						// 				uni.setStorageSync('isCanUse', false);
+						// 				_this.$refs.warrantLogin.open();
+						// 			  }
+						// 		})
+						//     },
+						// 	fail(err){
+						// 		uni.showModal({
+						// 		    title: '提示',
+						// 		    content: '获取用户信息失败',
+						// 			 cancelText:'取消',
+						// 			 confirmText:'确定',
+						// 		    success: function (res) {
+						// 		        if (res.confirm) {
+						// 		            console.log('用户点击确定');
+						// 		        } else if (res.cancel) {
+						// 		            console.log('用户点击取消');
+						// 		        }
+						// 		    }
+						// 		});
+						//}
+							
+						// })
 					}else{
 						uni.getUserInfo({
 							  provider: 'weixin',
 							  success:(infoRes)=>{
 								console.log('用户昵称为：' + infoRes.userInfo.nickName);
 								_this.$refs.warrantLogin.open()
-								
+								_this.isLoadingOrder = false;
 							  }
 						})
 					}
 					
 				}
+				
 				return;
 				
 				// Todo

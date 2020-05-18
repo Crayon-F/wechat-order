@@ -103,8 +103,8 @@
 						border-radius: 50%;
 						position: absolute;
 						top:40%;
-						left:50%;
-						transform: translate(-50%,0);
+						left:40%;
+						// transform: translate(-30%,0);
 						transform-origin: center;
 						animation: translate-sea-user 2s  linear infinite;
 					}
@@ -180,6 +180,7 @@
 							background: #76DAFF;
 							color:#fff;
 							margin-top:80px;
+							font-size: 24rpx;
 						}
 					}
 					 
