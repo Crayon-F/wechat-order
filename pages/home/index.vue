@@ -151,7 +151,7 @@
 				this.shopCarList.map(item=>{
 					amount+=item.price*item.number
 				})
-				console.log(amount)
+				// console.log(amount)
 				return amount;
 			},
 			totalNumber(){
@@ -159,7 +159,7 @@
 				this.shopCarList.map(item=>{
 					number+= parseInt(item.number) 
 				})
-				console.log(number)
+				// console.log(number)
 				return number;
 			}
 		},
@@ -300,7 +300,7 @@
 			},
 			getShopList(){
 				this.shopCarList = this.$store.state.shopcarList;
-				console.log(this.shopCarList)
+				// console.log(this.shopCarList)
 			},
 			currentAddCar(){
 				this.$store.commit('addShopCar',this.propertyChildIds)

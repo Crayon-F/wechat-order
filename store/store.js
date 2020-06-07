@@ -6,28 +6,68 @@ let state = {
 let mutations = {
 	addShopCar(state,current){
 		let isRepeact = false;
-		state.shopcarList.some(item=>{
+		let index = 0;
+		state.shopcarList.map(item=>{
 			if(item.id == current.id){
-				item.number = ++item.number;
-				isRepeact = true;
+				for(let i = 0;i<item.ids.length;i++){
+					let ids = item.ids[i];
+					// debugger;
+					if(current.ids.indexOf(ids) !== -1){
+						index++
+						if(index == item.ids.length){
+							console.log('index',index)
+							item.number = ++item.number;
+							isRepeact = true;
+						}
+					}else{
+						break;
+					}
+				}
+				// item.number = ++item.number;
+				// isRepeact = true;
 			}
 		})
 		if(!isRepeact){
 			state.shopcarList.push(current)
 		}
+		console.log(state.shopcarList)
 	},
 	updateShopCar(state,current){
+		let index = 0;
 		state.shopcarList.map(item=>{
 			if(item.id == current.id){
-				item.number = current.number
+				for(let i = 0;i<item.ids.length;i++){
+					let ids = item.ids[i];
+					// debugger;
+					if(current.ids.indexOf(ids) !== -1){
+						index++
+						if(index == item.ids.length){
+							item.number = current.number;
+						}
+					}else{
+						break;
+					}
+				}
 			}
 		})
 	},
 	delectShopCar(state,current){
 		let curIndex = 0;
+		let indexNumber = 0;
 		state.shopcarList.map((item,index)=>{
 			if(item.id == current.id){
-				curIndex = index
+				for(let i = 0;i<item.ids.length;i++){
+					let ids = item.ids[i];
+					// debugger;
+					if(current.ids.indexOf(ids) !== -1){
+						indexNumber++
+						if(indexNumber == item.ids.length){
+							curIndex = index;
+						}
+					}else{
+						break;
+					}
+				}
 			}
 		})
 		state.shopcarList.splice(curIndex,1)
